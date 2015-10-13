@@ -575,7 +575,7 @@ class ConferenceApi(remote.Service):
                     setattr(sf, field.name, str(getattr(sesh, field.name)))
                 else:
                     setattr(sf, field.name, getattr(sesh, field.name))
-            elif field.name == "websafeConferenceKey":
+            elif field.name == "websafeKey":
                 setattr(sf, field.name, sesh.key.urlsafe())
         # query speaker by the speaker_id and add values to form
         if sesh.speakerId:
@@ -604,7 +604,7 @@ class ConferenceApi(remote.Service):
         # copy SessionForm/ProtoRPC Message into dictionary
         data = {field.name: getattr(request, field.name) for field in request.all_fields()}
         # delete the unneeded values
-        del data['websafeConferenceKey']
+        del data['websafeKey']
         del data['speaker_name']
         del data['speaker_email']
         del data['speaker_gender']

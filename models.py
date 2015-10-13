@@ -176,7 +176,7 @@ class SessionForm(messages.Message):
     typeOfSession = messages.EnumField(TypeOfSession, 7, repeated=True)
     date = messages.StringField(8)  # DateField()
     startTime = messages.StringField(9)  # TimeField()
-    # websafeConferenceKey = messages.StringField(10)
+    websafeKey = messages.StringField(10)
 
 
 class SessionForms(messages.Message):
