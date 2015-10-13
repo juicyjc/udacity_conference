@@ -12,8 +12,8 @@ To run this application:
 3. Download and install the latest versin of Google App Engine for Python. (https://cloud.google.com/appengine/downloads?hl=en)
 4. Start up Google App Engine and click on File > Add Existing Application. Point to the repo you just downloaded.
 5. Select the repo and press the Run button.
-6. Take a look at the port number next to the application and browse to localhost:<port_number>.
-7. Look at the admin port number and browse to localhost:<admin_port_number>/datastore to see the local DataStore interface.
+6. Take a look at the port number next to the application and browse to localhost:port_number.
+7. Look at the admin port number and browse to localhost:admin_port_number/datastore to see the local DataStore interface.
 8. Enjoy!
 
 
