@@ -76,106 +76,98 @@ Query DataStore for one of the desired characteristics and then loop through the
 
 #### createSession()
 POST - session/{websafeConferenceKey}
+
 Request
 + websafeConferenceKey
 + SessionForm
 
-Response
-+ SessionForm
+Response - SessionForm
 
 #### getConferenceSessions()
 GET - sessions/{websafeConferenceKey}
-Request
-+ websafeConferenceKey
 
-Response
-+ SessionForms
+Request - websafeConferenceKey
+
+Response - SessionForms
 
 #### getConferenceSessionsByType()
 GET - sessions/{websafeConferenceKey}/{typeOfSession}
+
 Request
 + websafeConferenceKey
 + typeOfSession
 
-Response
-+ SessionForms
+Response - SessionForms
 
 #### getSessionsBySpeaker()
 GET - sessions/speaker/{email}
-Request
-+ email
 
-Response
-+ SessionForms
+Request - email
+
+Response - SessionForms
 
 #### getConferenceSessionsILike()
 GET - sessions_i_like/{websafeConferenceKey}
-Request
-+ websafeConferenceKey
 
-Response
-+ SessionForms
+Request - websafeConferenceKey
+
+Response - SessionForms
 
 #### addSessionToWishlist()
 POST - wishlist/{websafeSessionKey}
-Request
-+ websafeSessionKey
 
-Response
-+ BooleanMessage
+Request - websafeSessionKey
+
+Response - BooleanMessage
 
 #### removeSessionFromWishlist()
 DELETE - wishlist/{websafeSessionKey}
-Request
-+ websafeSessionKey
 
-Response
-+ BooleanMessage
+Request - websafeSessionKey
+
+Response - BooleanMessage
 
 #### getSessionsInWishlist()
 GET - wishlist
-Response
-+ SessionForms
+
+Response - SessionForms
 
 #### getSessionsInWishlistPerConf()
 GET - wishlist/{websafeConferenceKey}
-Request
-+ websafeConferenceKey
 
-Response
-+ SessionForms
+Request - websafeConferenceKey
+
+Response - SessionForms
 
 #### createSpeaker()
 POST - createSpeaker
-Request
-+ SpeakerForm
 
-Response
-+ SpeakerForm
+Request - SpeakerForm
+
+Response - SpeakerForm
 
 #### getSpeakers()
 GET - speaker
-Response
-+ SpeakerForms
+
+Response - SpeakerForms
 
 #### getSpeakersByConf()
 GET - speaker/{websafeConferenceKey}
-Request
-+ websafeConferenceKey
 
-Response
-+ SpeakerForms
+Request - websafeConferenceKey
+
+Response - SpeakerForms
 
 #### getSpeaker()
 POST - speaker
+
 Request
 + email
 + name
 
-Response
-+ SpeakerForms
+Response - SpeakerForms
 
 #### getFeaturedSpeaker()
 GET - speaker/featured/get
-Response
-+ StringMessage
+
+Response - StringMessage
