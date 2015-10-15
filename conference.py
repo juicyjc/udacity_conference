@@ -605,6 +605,7 @@ class ConferenceApi(remote.Service):
         data = {field.name: getattr(request, field.name) for field in request.all_fields()}
         # delete the unneeded values
         del data['websafeKey']
+        del data['websafeConferenceKey']
         del data['speaker_name']
         del data['speaker_email']
         del data['speaker_gender']
@@ -644,21 +645,13 @@ class ConferenceApi(remote.Service):
 
         # check to see if we should create a featured speaker
         if speaker:
-            # get all sessions for this conference
-            sessions = Session.query(ancestor=conf_key)
-            speaker_sessions = []
-            # loop over the sessions
-            for session in sessions:
-                # if the speaker of this session is the same as the speaker of
-                # the session we just created
-                if session.speakerId == data['speakerId']:
-                    # add this session to our list
-                    speaker_sessions.append(session)
-            # create a comma-delimited list of session names
-            session_names = ', '.join(session.name for session in speaker_sessions)
+            # get all sessions for this conference with this speaker
+            sessions = Session.query(Session.speakerId == data['speakerId'], ancestor=conf_key)
+            # create a comma-delimited string of session names
+            session_names = ', '.join(session.name for session in sessions)
             # if this speaker is speaking in more than one session for this
             # conference then pass his name and session names to the task queue
-            if(len(speaker_sessions) > 1):
+            if sessions.count() > 1:
                 taskqueue.add(
                     params={'speaker_name': speaker.name,
                             'session_names': session_names},
@@ -689,7 +682,7 @@ class ConferenceApi(remote.Service):
         )
 
     @endpoints.method(SESH_GET_REQUEST_TYPE, SessionForms,
-                      path='sessions/{websafeConferenceKey}/{typeOfSession}',
+                      path='sessions/{websafeConferenceKey}/type/{typeOfSession}',
                       http_method='GET', name='getConferenceSessionsByType')
     def getConferenceSessionsByType(self, request):
         """Given a conference, return all sessions of a specified type (eg lecture, keynote, workshop)"""
