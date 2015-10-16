@@ -41,6 +41,12 @@ The properties of the Session and Speaker kinds are mostly String and Integer pr
 getConferenceSessionsILike() method
 
 #### Discussion
+When I first read this problem I seemed to recall from the lesson that in DataStore I could only query for one inequality at a time. I tried a query for both inequalities to see what would happen and that resulted in the error listed above. My next thought was that I'd have to do the second filter programmatically after getting the result set back from the first. I decided to Google the issue just in case there was some way to get around this issue in one DS query. However, I found a StackOverflow posting that confirmed my suspicions:
+
+http://stackoverflow.com/questions/14205571/ndb-query-excluding-multiple-keys-or-ids
+
+Thus, I took the following approach to solve the problem:
+
 Query DataStore for one of the desired characteristics and then loop through the result set and create a list of sessionIds that have the other characteristic that we want to exclude. Then in our return when we create our SessionForms object using a List Comprehension, we can exclude the sessions that have IDs in our exclude list. I chose to have DataStore handle the typeOfSession exclusion because it seemed harder to do manually because of the way it was implemented. TypeOfSession is an enum list but DataStore knows what I mean when I write "Session.typeOfSession != TypeOfSession.WORKSHOP" as part of the query. Then I can simply loop through the result set and add the IDs of sessions that have a startTime greater than 7PM to our exclusion list.
 
 ## Classes
